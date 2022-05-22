@@ -1,10 +1,10 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const dbConn = mysql.createConnection({
-    host : 'sql4.freemysqlhosting.net',
-    user : 'sql4493731',
-    password : 'RhJb5HFr4L',
-    database : 'sql4493731',
+    host : '192.168.64.2',
+    user : 'jamiewhite',
+    password : 'password',
+    database : 'SchoolPOSSystem',
     multipleStatements : true
 });
 

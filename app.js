@@ -6,8 +6,21 @@ var logger = require('morgan');
 var conn = require('./dbcredentials/dbcredentials');
 var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+
+var adminReportRouter = require('./routes/Admin/admin-reports');
+var customersRouter = require('./routes/Admin/customers');
+var ordersRouter = require('./routes/Admin/orders');
+var stockRouter = require('./routes/Admin/stock');
+
+var accountRouter = require('./routes/Customer/customer-account');
+var customerReportRouter = require('./routes/Customer/customer-reports');
+var suggestionsRouter = require('./routes/Customer/suggestions');
+
+var posReportRouter = require('./routes/POS/pos-report');
+var posRouter = require('./routes/POS/pos');
+
+
 
 var app = express();
 
@@ -21,8 +34,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+
+app.use('/admin-report', adminReportRouter);
+app.use('/customers', customersRouter);
+app.use('/orders', ordersRouter);
+app.use('/stock', stockRouter);
+
+app.use('/account', accountRouter);
+app.use('/customer-report', customerReportRouter);
+app.use('/suggestions', suggestionsRouter);
+
+app.use('pos-report', posReportRouter);
+app.use('/pos', posRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
