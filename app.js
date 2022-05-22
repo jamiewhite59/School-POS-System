@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var conn = require('./dbcredentials/dbcredentials');
 var session = require('express-session');
+var SQLStore = require('express-mysql-session')(session);
 
 var loginRouter = require('./routes/login');
 
@@ -28,11 +29,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(express.urlencoded({extended : true}));
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const sessionStore = new SQLStore({}, conn);
+app.use(session({
+  secret: 'cookieSecret',
+  store : sessionStore,
+  expires : null,
+  cookie : {}
+}))
 
 app.use('/login', loginRouter);
 
