@@ -1,41 +1,53 @@
 function login(){
   if (validateLoginDetails()){
-    console.log("here");
-  } else{
-    alertBanner("hello there");
-  }
-
+    checkLogin();
+  } 
 }
 
+// Validate the details in the login form.
 function validateLoginDetails(){
-  if($('input[name="username"').val() && $('input[name="password"').val()){
-    if(validateInput($('input[name="username"]'))){
-      if(validateInput($('input[name="password"').val())){
+  // Check inputs are not empty.
+  if($('input[name="email"').val() && $('input[name="password"').val()){
+    // Validate each input box.
+    if(validateInput($('input[name="email"]').val()) && validateInput($('input[name="password"').val())){
         return true;
-      }
     }
+    alertBanner("Illegal characters in input");
+    return false;
   }
-  else{
-    console.log("no value");
-  }
-  console.log($('input[name="username"]').val());
+  alertBanner("Please fill out the entire form");
   return false;
 }
 
+// AJAX function
 function checkLogin(){
-  return false;
+  console.log('here');
+  $.ajax({
+    url: "/login/login",
+    type: "POST",
+    dataType: "json",
+    data: $('#loginForm').serialize(),
+    success: function(returned){
+      console.log(returned);
+      console.log(returned[0].UserType);
+    },
+    error: function(){
+      console.log('fail');
+    }
+  });
 }
 
+// Alert banner displayed inside the pre-determined conatainer.
 function alertBanner(message){
-  console.log("banner");
+  // Alert banner already exists.
   if($('#alertBanner')[0]){
-    console.log("exists");
+    clearTimeout(bannerTimeout);
     $('#alertBanner')[0].remove();
   }
   var wrapper = document.createElement('div');
   wrapper.innerHTML = '<div id="alertBanner" class="alert alert-danger alert-dismissible fade show">'
   + '<strong> Error: </strong>'+message
-  + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+  + '<button type="button" class="btn-close" onclick="closeAlert(this)" data-bs-dismiss="alert"></button></div>';
 
   docReady(() => {
     let errorContainer = document.querySelector('.errorContainer');
@@ -46,14 +58,13 @@ function alertBanner(message){
   });
 }
 
+// Validates a string
 function validateInput(input){
-  console.log("validate");
-  return false;
+  return !input.match(/[|;$%"<>()+]/g);
 }
 
-
+// Closes the alert.
 function closeAlert(event){
-
   event.parentNode.remove();
 }
 
