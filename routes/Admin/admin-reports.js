@@ -11,7 +11,7 @@ router.get('/', async function(req, res, next) {
     title : "Admin-Reports",
   }
 
-  res.render('admin-reports', options);
+  res.render('Admin/admin-reports', options);
 });
 
 module.exports = router;

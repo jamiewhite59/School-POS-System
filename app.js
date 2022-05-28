@@ -54,7 +54,7 @@ app.use('/account', accountRouter);
 app.use('/customer-report', customerReportRouter);
 app.use('/suggestions', suggestionsRouter);
 
-app.use('pos-report', posReportRouter);
+app.use('/pos-report', posReportRouter);
 app.use('/pos', posRouter);
 
 // catch 404 and forward to error handler

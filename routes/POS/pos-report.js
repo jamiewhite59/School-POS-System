@@ -11,7 +11,7 @@ router.get('/', async function(req, res, next) {
     title : "Pos report",
   }
 
-  res.render('pos-report', options);
+  res.render('POS/pos-report', options);
 });
 
 module.exports = router;
