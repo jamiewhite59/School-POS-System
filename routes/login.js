@@ -24,13 +24,7 @@ router.post('/login', async function(req,res){
 
   try{
     let data = await query(sql);
-    if(data.length == 1){
-      res.redirect('account');
-    }
-    else{
-      console.log('here');
-      res.json(data);
-    }
+    res.json(data);
   } catch(err){
     console.log("error");
   }

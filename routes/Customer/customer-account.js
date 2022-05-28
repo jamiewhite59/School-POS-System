@@ -11,7 +11,7 @@ router.get('/', async function(req, res, next) {
     title : "Account",
   }
 
-  res.render('Customer/account', options);
+  res.render('Customer/customer-account', options);
 });
 
 module.exports = router;

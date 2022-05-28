@@ -21,15 +21,18 @@ function validateLoginDetails(){
 
 // AJAX function
 function checkLogin(){
-  console.log('here');
   $.ajax({
     url: "/login/login",
     type: "POST",
     dataType: "json",
     data: $('#loginForm').serialize(),
     success: function(returned){
-      console.log(returned);
-      console.log(returned[0].UserType);
+      if(returned.length == 1){
+        window.location.href = "/account"
+      }
+      else{
+        alertBanner("Incorrect login details");
+      }
     },
     error: function(){
       console.log('fail');
