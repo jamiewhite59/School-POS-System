@@ -20,15 +20,15 @@ html(lang="en")
           p#loginLabel Account Login
           div.form-group
             div.form-floating
-              input.form-control#loginUsername(type='text' placeholder='Username' name='username')
-              label(for='loginUsername') Username
+              input.form-control#loginUsername(type='text' placeholder='Email' name='email')
+              label(for='loginEmail') Email
           div.form-group
             div.form-floating.input-group
               input.form-control#loginPassword(type='password' placeholder='Password' name='password')
               label(for='loginPassword') Password
               div.input-group-append
                 span.input-group-text#passwordToggle test
-          button.btn#loginSubmit(type='button' onclick="login()") Login
+          button.btn.btn-warning#loginSubmit(type='button' onclick="login()") Login
 
 
             
