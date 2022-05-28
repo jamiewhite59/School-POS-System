@@ -1,0 +1,53 @@
+body{
+  display: flex;
+  align-items: center;
+  background-color: #7395AE;
+}
+
+#contentContainer{
+  width: 20vw;
+  margin: auto;
+}
+
+#loginContainer {
+  width: 100%;
+  position: relative;
+  height: 30vw;
+  /* border-style: double; */
+}
+
+#passwordGroup{
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+#passwordToggle{
+  height: 100%;
+}
+
+#passwordInputContainer{
+  width: 100%;
+}
+
+.errorContainer{
+  position: relative;
+  height: 10vh;
+  width: 100%;
+}
+
+
+#schoolIconImage{
+  width: auto;
+  height: 10vw;
+  margin: auto;
+  display: -webkit-flex;
+}
+
+#loginLabel {
+  text-align: center;
+  font-size: 2vw;
+  margin: 1.5vh;
+}
+

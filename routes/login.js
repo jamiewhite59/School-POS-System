@@ -10,9 +10,9 @@ router.get('/', async function(req, res, next) {
 
   let options = {
     title : "Express",
-    sql : sql
+    sql : sql,
+    session : req.session
   }
-
   res.render('login', options);
 });
 
