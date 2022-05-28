@@ -16,4 +16,24 @@ router.get('/', async function(req, res, next) {
   res.render('login', options);
 });
 
+router.post('/login', async function(req,res){
+  let email = req.body.email;
+  let password = req.body.password;
+
+  let sql = "SELECT UserType FROM Users WHERE Email='"+email+"' AND PasswordHash='"+password+"'";
+
+  try{
+    let data = await query(sql);
+    if(data.length == 1){
+      res.redirect('account');
+    }
+    else{
+      console.log('here');
+      res.json(data);
+    }
+  } catch(err){
+    console.log("error");
+  }
+})
+
 module.exports = router;
