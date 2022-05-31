@@ -1,1 +1,68 @@
 extends utilities
+append stylesheets
+  link(rel='stylesheet', href='/stylesheets/navigation.css')
+  link(rel='stylesheet', href='/stylesheets/navbar_toggle.css')
+append scripts
+  script(src='javascripts/navigation.js')
+
+block body
+  //- button.btn.btn-primary#toggleSidebar(type="button" data-bs-toggle="collapse" data-bs-target="#sidebarContainer" aria-expanded="false" aria-controls="#sidebarContainer")
+  //- #sidebarContainer.collapse.collapse-horizontal
+  //-   img#schoolIconImage(src="/images/school_icon.png" alt="icon of school")
+  //-   hr
+
+  //- - if (session.AccountType == "Admin"){
+  //-   - items = ["Manage Customers", "Stock", "Orders", "Reports", "Account"]
+  //-   each item in items
+  //-     p= item
+  //-   p Logout
+  //- - }
+
+  //-   - if (session.AccountType == "Customer"){
+  //-     - items = ["Account", "Reports", "Suggestions"]
+  //-     each item in items
+  //-       p= item
+  //-     p Logout
+  //-   - }
+
+  //-   - if (session.AccountType == "POS"){
+  //-     - items = ["POS", "Refunds", "Receipts", "Reports"]
+  //-     each item in items
+  //-       p= item
+      
+  //-     p Logout
+  //-   - }
+  .main
+    label.menu-button-wrapper(for="")
+      input.menu-button(type="checkbox")
+      .icon-wrapper
+        label.hamburger
+          input.hamburger-input(type="checkbox")
+          span.hamburger-line.first
+          span.hamburger-line.second
+          span.hamburger-line.third
+      .item-list
+        - if (session.AccountType == "Admin"){
+          - items = ["Manage Customers", "Stock", "Orders", "Reports", "Account"]
+          each item in items
+            div= item
+          div Logout
+        - }
+        - if (session.AccountType == "POS"){
+          - items = ["POS", "Refunds", "Receipts", "Reports"]
+          each item in items
+            div= item
+          div Logout
+        - }
+        - if (session.AccountType == "Customer"){
+          - items = ["Account", "Reports", "Suggestions"]
+          each item in items
+            div= item
+          div Logout
+        - }
+
+        //- div item1
+        //- div Item2
+        //- div item3
+        //- div item4
+    

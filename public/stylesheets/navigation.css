@@ -1,0 +1,19 @@
+#sidebarContainer {
+  width: 10%;
+  height: 100%;
+  min-width: 100px;
+  border-top-right-radius: 10px;
+  background-color: #e6e6e6;
+  text-align: center;
+}
+
+#schoolIconImage{
+  margin-top: 2vh;
+  width: 7vw;
+  min-width: 70px;
+}
+
+#toggleSidebar{
+  width: 10%;
+  height: 3vh;
+}
