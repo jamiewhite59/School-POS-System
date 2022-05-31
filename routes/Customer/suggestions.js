@@ -11,7 +11,7 @@ router.get('/', async function(req, res, next) {
     title : "Suggestions",
   }
 
-  res.render('suggestions', options);
+  res.render('Customer/suggestions', options);
 });
 
 module.exports = router;
