@@ -22,12 +22,16 @@ function validateLoginDetails(){
 // AJAX function
 function checkLogin(){
   $.ajax({
+    // POST route in the routes js file.
     url: "/login/login",
     type: "POST",
+    // Datatype that is expected
     dataType: "json",
     data: $('#loginForm').serialize(),
     success: function(returned){
+      // If the returned item has length = 1 then there is successful login.
       if(returned.length == 1){
+        // Redirect to landing page.
         window.location.href = "/account"
       }
       else{
@@ -44,9 +48,12 @@ function checkLogin(){
 function alertBanner(message){
   // Alert banner already exists.
   if($('#alertBanner')[0]){
+    // Remove the timeout for the existing banner.
     clearTimeout(bannerTimeout);
+    // Remove the existing banner.
     $('#alertBanner')[0].remove();
   }
+  // Creating the banner and the content for it.
   var wrapper = document.createElement('div');
   wrapper.innerHTML = '<div id="alertBanner" class="alert alert-danger alert-dismissible fade show">'
   + '<strong> Error: </strong>'+message
@@ -54,7 +61,9 @@ function alertBanner(message){
 
   docReady(() => {
     let errorContainer = document.querySelector('.errorContainer');
+    // Adds the banner to the container on the page.
     errorContainer.append(wrapper);
+    // Banner will be removed in 3 seconds.
     bannerTimeout = setTimeout(function(){
       errorContainer.innerHTML = "";
     }, 3000);
