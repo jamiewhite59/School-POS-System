@@ -44,20 +44,21 @@ block body
       .item-list
         - if (session.AccountType == "Admin"){
           - items = ["Manage Customers", "Stock", "Orders", "Reports", "Account"]
+          - items = [{"title":"Manage Customers","navigation":"","icon":""},{"title":"Stock","navigation":"","icon":""},{"title":"Orders","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""},{"title":"Account","navigation":"","icon":""}]
           each item in items
             div= item
           div Logout
         - }
         - if (session.AccountType == "POS"){
-          - items = ["POS", "Refunds", "Receipts", "Reports"]
+          - items = [{"title":"POS","navigation":"","icon":""},{"title":"Refunds","navigation":"","icon":""},{"title":"Receipts","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""}]
           each item in items
             div= item
           div Logout
         - }
         - if (session.AccountType == "Customer"){
-          - items = ["Account", "Reports", "Suggestions"]
+          - items = [{"title":"Account","navigation":"this","icon":"thiss"},{"title":"Reports","navigation":"this","icon":"thiss"},{"title":"Suggestions","navigation":"this","icon":"thiss"}]
           each item in items
-            div= item
+            div= item.title
           div Logout
         - }
 
