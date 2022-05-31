@@ -24,6 +24,9 @@ router.post('/login', async function(req,res){
 
   try{
     let data = await query(sql);
+    if(data.length == 1){
+      req.session.AccountType = data[0].UserType;
+    }
     res.json(data);
   } catch(err){
     console.log("error");
