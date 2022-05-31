@@ -9,8 +9,11 @@ router.get('/', async function(req, res, next) {
 
   let options = {
     title : "Customer reports",
+    session : req.session
   }
 
+  req.session.AccountType = "Admin";
+  console.log(options);
   res.render('Customer/customer-reports', options);
 });
 

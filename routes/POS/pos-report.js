@@ -9,6 +9,7 @@ router.get('/', async function(req, res, next) {
 
   let options = {
     title : "Pos report",
+    session : req.session
   }
 
   res.render('POS/pos-report', options);

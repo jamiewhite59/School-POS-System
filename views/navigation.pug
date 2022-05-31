@@ -1,1 +1,44 @@
 extends utilities
+append stylesheets
+  link(rel='stylesheet', href='/stylesheets/navigation.css')
+  link(rel='stylesheet', href='/stylesheets/navbar_toggle.css')
+append scripts
+  script(src='javascripts/navigation.js')
+
+block body
+  .main
+    label.menu-button-wrapper(for="")
+      input.menu-button(type="checkbox")
+      .icon-wrapper
+        label.hamburger
+          input.hamburger-input(type="checkbox")
+          span.hamburger-line.first
+          span.hamburger-line.second
+          span.hamburger-line.third
+      .item-list
+        .listContainer
+          - if (session.AccountType == "Admin"){
+            - items = [{"title":"Customers","navigation":"customers","icon":"fa-users"},{"title":"Stock","navigation":"stock","icon":"fa-warehouse"},{"title":"Orders","navigation":"orders","icon":"fa-bacon"},{"title":"Reports","navigation":"admin-report","icon":"fa-file"},{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              li
+                a(href=item.navigation)
+                  i.fas(class=item.icon)
+                  text= item.title
+          - }
+          - if (session.AccountType == "POS"){
+            - items = [{"title":"POS","navigation":"pos","icon":""},{"title":"Refunds","navigation":"","icon":""},{"title":"Receipts","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              a(href=item.navigation)
+                i.fas(class=item.icon)
+                text= item.title
+              br
+          - }
+          - if (session.AccountType == "Customer"){
+            - items = [{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Reports","navigation":"customer-report","icon":"thiss"},{"title":"Suggestions","navigation":"suggestions","icon":"thiss"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              a(href=item.navigation)
+                i.fas(class=item.icon)
+                text= item.title
+              br
+          - }
+  
