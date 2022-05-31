@@ -1,7 +1,9 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
-
+/* .listContainer{
+  opacity: 0;
+} */
 .main {
   margin-top: 10px;
   margin-left: 45px;
@@ -64,7 +66,7 @@
   position: relative;
   display: inline-block;
 }
-.menu-button-wrapper .item-list {
+.menu-button-wrapper .item-list{
   position: absolute;
   top: 90px;
   transform: translateX(-50%) scale(0);
@@ -75,14 +77,12 @@
   width: 150px;
   left: 50%;
   padding: 15px 0;
-  text-align: left;
   border-radius: 100px;
   font-weight: 300;
   opacity: 0;
   user-select: none;
 }
-.menu-button-wrapper .item-list div {
-  padding: 10px 30px;
+.menu-button-wrapper .item-list a {
   cursor: pointer;
 }
 .menu-button-wrapper .menu-button {
@@ -100,7 +100,15 @@
   border-radius: 20px;
   opacity: 1;
   user-select: auto;
+  text-align: center;
 }
+
+/* .menu-button:checked ~ .listContainer{
+  opacity: 1 !important;
+} */
+
+
+
 .menu-button:checked ~ .icon-wrapper .hamburger-line.second {
   transform: rotate(-45deg);
 }

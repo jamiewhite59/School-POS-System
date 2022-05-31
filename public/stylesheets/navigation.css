@@ -1,19 +1,19 @@
-#sidebarContainer {
-  width: 10%;
-  height: 100%;
-  min-width: 100px;
-  border-top-right-radius: 10px;
-  background-color: #e6e6e6;
-  text-align: center;
+li {
+  list-style-type: none;
+  margin-top: 10px;
+  color: white;
+}
+text{
+  margin-left: 5px;
+  color: white;
 }
 
-#schoolIconImage{
-  margin-top: 2vh;
-  width: 7vw;
-  min-width: 70px;
+a{
+  text-decoration: none;
+  border-radius: 3px;
+  padding: 5px;
 }
 
-#toggleSidebar{
-  width: 10%;
-  height: 3vh;
+a:hover{
+  background-color: green;
 }

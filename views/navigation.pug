@@ -6,32 +6,6 @@ append scripts
   script(src='javascripts/navigation.js')
 
 block body
-  //- button.btn.btn-primary#toggleSidebar(type="button" data-bs-toggle="collapse" data-bs-target="#sidebarContainer" aria-expanded="false" aria-controls="#sidebarContainer")
-  //- #sidebarContainer.collapse.collapse-horizontal
-  //-   img#schoolIconImage(src="/images/school_icon.png" alt="icon of school")
-  //-   hr
-
-  //- - if (session.AccountType == "Admin"){
-  //-   - items = ["Manage Customers", "Stock", "Orders", "Reports", "Account"]
-  //-   each item in items
-  //-     p= item
-  //-   p Logout
-  //- - }
-
-  //-   - if (session.AccountType == "Customer"){
-  //-     - items = ["Account", "Reports", "Suggestions"]
-  //-     each item in items
-  //-       p= item
-  //-     p Logout
-  //-   - }
-
-  //-   - if (session.AccountType == "POS"){
-  //-     - items = ["POS", "Refunds", "Receipts", "Reports"]
-  //-     each item in items
-  //-       p= item
-      
-  //-     p Logout
-  //-   - }
   .main
     label.menu-button-wrapper(for="")
       input.menu-button(type="checkbox")
@@ -42,28 +16,29 @@ block body
           span.hamburger-line.second
           span.hamburger-line.third
       .item-list
-        - if (session.AccountType == "Admin"){
-          - items = ["Manage Customers", "Stock", "Orders", "Reports", "Account"]
-          - items = [{"title":"Manage Customers","navigation":"","icon":""},{"title":"Stock","navigation":"","icon":""},{"title":"Orders","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""},{"title":"Account","navigation":"","icon":""}]
-          each item in items
-            div= item
-          div Logout
-        - }
-        - if (session.AccountType == "POS"){
-          - items = [{"title":"POS","navigation":"","icon":""},{"title":"Refunds","navigation":"","icon":""},{"title":"Receipts","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""}]
-          each item in items
-            div= item
-          div Logout
-        - }
-        - if (session.AccountType == "Customer"){
-          - items = [{"title":"Account","navigation":"this","icon":"thiss"},{"title":"Reports","navigation":"this","icon":"thiss"},{"title":"Suggestions","navigation":"this","icon":"thiss"}]
-          each item in items
-            div= item.title
-          div Logout
-        - }
-
-        //- div item1
-        //- div Item2
-        //- div item3
-        //- div item4
-    
+        .listContainer
+          - if (session.AccountType == "Admin"){
+            - items = [{"title":"Customers","navigation":"customers","icon":"fa-users"},{"title":"Stock","navigation":"stock","icon":"fa-warehouse"},{"title":"Orders","navigation":"orders","icon":"fa-bacon"},{"title":"Reports","navigation":"admin-report","icon":"fa-file"},{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              li
+                a(href=item.navigation)
+                  i.fas(class=item.icon)
+                  text= item.title
+          - }
+          - if (session.AccountType == "POS"){
+            - items = [{"title":"POS","navigation":"pos","icon":""},{"title":"Refunds","navigation":"","icon":""},{"title":"Receipts","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              a(href=item.navigation)
+                i.fas(class=item.icon)
+                text= item.title
+              br
+          - }
+          - if (session.AccountType == "Customer"){
+            - items = [{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Reports","navigation":"customer-report","icon":"thiss"},{"title":"Suggestions","navigation":"suggestions","icon":"thiss"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            each item in items
+              a(href=item.navigation)
+                i.fas(class=item.icon)
+                text= item.title
+              br
+          - }
+  

@@ -13,6 +13,7 @@ router.get('/', async function(req, res, next) {
   }
 
   req.session.AccountType = "Admin";
+  console.log(options);
   res.render('Customer/customer-reports', options);
 });
 
