@@ -12,7 +12,7 @@ router.get('/', async function(req, res, next) {
     session : req.session
   }
 
-  req.session.AccountType = "Admin";
+  req.session.AccountType = "Customer";
   console.log(options);
   res.render('Customer/customer-reports', options);
 });

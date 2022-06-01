@@ -15,5 +15,9 @@ a{
 }
 
 a:hover{
-  background-color: green;
+  background-color: #e6be94;
+}
+
+i {
+  color: white;
 }

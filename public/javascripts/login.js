@@ -1,15 +1,39 @@
+import * as scripts from './script.js'
+// Variable required to remove the timeout of existing banners to be replaced with new ones.
+var bannerTimeout;
+
+$(document).ready(function(){
+  $('#loginSubmit').click(function(){
+    login();
+  })
+
+  $('#registerButton').click(function(){
+    openRegisterModal();
+  })
+
+  $('#modalRegisterButton').click(function(){
+    register();
+  })
+
+  $('#closeRegisterModalButton').click(function(){
+    closeRegisterModal();
+  })
+});
+
 function login(){
   if (validateLoginDetails()){
     checkLogin();
   } 
 }
 
+
+
 // Validate the details in the login form.
 function validateLoginDetails(){
   // Check inputs are not empty.
   if($('input[name="email"').val() && $('input[name="password"').val()){
     // Validate each input box.
-    if(validateInput($('input[name="email"]').val()) && validateInput($('input[name="password"').val())){
+    if(scripts.validateInput($('input[name="email"]').val()) && scripts.validateInput($('input[name="password"').val())){
         return true;
     }
     alertBanner("Illegal characters in input");
@@ -57,7 +81,7 @@ function alertBanner(message){
   var wrapper = document.createElement('div');
   wrapper.innerHTML = '<div id="alertBanner" class="alert alert-danger alert-dismissible fade show">'
   + '<strong> Error: </strong>'+message
-  + '<button type="button" class="btn-close" onclick="closeAlert(this)" data-bs-dismiss="alert"></button></div>';
+  + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
 
   docReady(() => {
     let errorContainer = document.querySelector('.errorContainer');
@@ -70,14 +94,16 @@ function alertBanner(message){
   });
 }
 
-// Validates a string
-function validateInput(input){
-  return !input.match(/[|;$%"<>()+]/g);
+function openRegisterModal(){
+  $('#registerModal').modal('show');
 }
 
-// Closes the alert.
-function closeAlert(event){
-  event.parentNode.remove();
+function closeRegisterModal(){
+  $('#registerModal').modal('hide');
+}
+
+function register(){
+  console.log('register clicked');
 }
 
 function docReady(fn){

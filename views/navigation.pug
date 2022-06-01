@@ -28,17 +28,17 @@ block body
           - if (session.AccountType == "POS"){
             - items = [{"title":"POS","navigation":"pos","icon":""},{"title":"Refunds","navigation":"","icon":""},{"title":"Receipts","navigation":"","icon":""},{"title":"Reports","navigation":"","icon":""},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
             each item in items
-              a(href=item.navigation)
-                i.fas(class=item.icon)
-                text= item.title
-              br
+              li
+                a(href=item.navigation)
+                  i.fas(class=item.icon)
+                  text= item.title
           - }
           - if (session.AccountType == "Customer"){
-            - items = [{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Reports","navigation":"customer-report","icon":"thiss"},{"title":"Suggestions","navigation":"suggestions","icon":"thiss"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
+            - items = [{"title":"Account","navigation":"account","icon":"fa-user"},{"title":"Reports","navigation":"customer-report","icon":"fa-file"},{"title":"Suggestions","navigation":"suggestions","icon":"fa-question"},{"title":"Logout","navigation":"login","icon":"fa-arrow-right-from-bracket"}]
             each item in items
-              a(href=item.navigation)
-                i.fas(class=item.icon)
-                text= item.title
-              br
+              li
+                a(href=item.navigation)
+                  i.fas(class=item.icon)
+                  text= item.title
           - }
   

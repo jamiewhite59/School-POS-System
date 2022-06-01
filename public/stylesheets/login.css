@@ -13,7 +13,8 @@ body{
   width: 100%;
   position: relative;
   height: 30vw;
-  /* border-style: double; */
+  border-radius: 10px;
+  border-style: double;
 }
 
 #passwordGroup{
@@ -27,9 +28,6 @@ body{
   height: 100%;
 }
 
-#passwordInputContainer{
-  width: 100%;
-}
 
 .errorContainer{
   position: relative;
@@ -45,9 +43,17 @@ body{
   display: -webkit-flex;
 }
 
+#loginUsername, #loginPassword {
+  border-radius: 15px;
+}
+
 #loginLabel {
   text-align: center;
   font-size: 2vw;
   margin: 1.5vh;
+}
+
+#loginSubmit, #registerButton{
+  border-radius: 20px;
 }
 
