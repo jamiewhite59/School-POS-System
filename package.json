@@ -19,5 +19,8 @@
     "nodemon": "^2.0.16",
     "pug": "2.0.0-beta11",
     "util": "^0.12.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }

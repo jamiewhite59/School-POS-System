@@ -1,39 +1,40 @@
-import * as scripts from './script.js'
-// Variable required to remove the timeout of existing banners to be replaced with new ones.
-var bannerTimeout;
+import * as validation from './modules/validation.js'
+import * as modal from './modules/modal.js'
+import alertBanner from './modules/alert-banner.js'
 
 $(document).ready(function(){
+  // Set listeners for click events.
+
   $('#loginSubmit').click(function(){
     login();
   })
 
   $('#registerButton').click(function(){
-    openRegisterModal();
+    modal.open(this);
   })
 
   $('#modalRegisterButton').click(function(){
-    register();
+    registerAccount();
   })
 
   $('#closeRegisterModalButton').click(function(){
-    closeRegisterModal();
+    modal.close(this);
   })
 });
 
+// Check the values in the form are valid then checks the data with the server.
 function login(){
   if (validateLoginDetails()){
     checkLogin();
   } 
 }
 
-
-
 // Validate the details in the login form.
 function validateLoginDetails(){
   // Check inputs are not empty.
-  if($('input[name="email"').val() && $('input[name="password"').val()){
+  if($('input[name="loginEmail"').val() && $('input[name="loginPassword"').val()){
     // Validate each input box.
-    if(scripts.validateInput($('input[name="email"]').val()) && scripts.validateInput($('input[name="password"').val())){
+    if(validation.validateInput($('input[name="loginEmail"]').val()) && validation.validateInput($('input[name="loginPassword"').val())){
         return true;
     }
     alertBanner("Illegal characters in input");
@@ -68,48 +69,96 @@ function checkLogin(){
   });
 }
 
-// Alert banner displayed inside the pre-determined conatainer.
-function alertBanner(message){
-  // Alert banner already exists.
-  if($('#alertBanner')[0]){
-    // Remove the timeout for the existing banner.
-    clearTimeout(bannerTimeout);
-    // Remove the existing banner.
-    $('#alertBanner')[0].remove();
+function registerAccount(){
+  if(validateRegisterDetails()){
+    register();
   }
-  // Creating the banner and the content for it.
-  var wrapper = document.createElement('div');
-  wrapper.innerHTML = '<div id="alertBanner" class="alert alert-danger alert-dismissible fade show">'
-  + '<strong> Error: </strong>'+message
-  + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+}
 
-  docReady(() => {
-    let errorContainer = document.querySelector('.errorContainer');
-    // Adds the banner to the container on the page.
-    errorContainer.append(wrapper);
-    // Banner will be removed in 3 seconds.
-    bannerTimeout = setTimeout(function(){
-      errorContainer.innerHTML = "";
-    }, 3000);
+function validateRegisterDetails(){
+  // Check values are not empty.
+  if(!checkEmptyRegisterForm()){
+    alertBanner("Please fill out the entire form");
+    console.log('empty fields');
+    return false;
+  }
+  // Check for illegal characters in the form.
+  if(!checkIllegalRegisterForm()){
+    alertBanner("Illegal characters in input");
+    console.log('illegal characters');
+    return false;
+  }
+  // Checks for a valid email.
+  if(!validation.validateEmail($('input[name="registerEmail"').val())){
+    alertBanner("Invalid email");
+    console.log('invalid email');
+    return false;
+  }
+  // Checks for valid postcode.
+  if(!validation.validatePostcode($('input[name="registerPostcode"').val())){
+    alertBanner("Invalid postcode");
+    console.log('invalid postcode');
+    return false;
+  }
+  // Checks passwords match.
+  if(($('input[name="registerPassword"').val() != $('input[name="registerPasswordConfirm"').val())){
+    alertBanner("Passwords do not match");
+    console.log("passwords do not match");
+    return false;
+  }
+  // All validation checks pass.
+  return true;
+
+  //Check not empty
+  //Check illegal characters
+  // Check email is an email
+  // DOB over 5 y/o
+  // Postcode length
+  // House number is a number
+}
+
+// Check email does not already exist.
+function register(){
+  $.ajax({
+    // POST route in the routes js file.
+    url: "/login/register",
+    type: "POST",
+    // Datatype that is expected
+    dataType: "json",
+    data: $('#registerForm').serialize(),
+    success: function(returned){
+      if (returned.exists){
+        console.log("Email exists");
+        alertBanner("Account with that email already exists");
+      } else{
+        console.log("insert complete");
+      }
+    },
+    error: function(){
+      console.log('fail');
+    }
   });
 }
 
-function openRegisterModal(){
-  $('#registerModal').modal('show');
+function checkEmptyRegisterForm(){
+  return !!($('input[name="registerFName"').val() &&
+   $('input[name="registerSName"').val() && 
+   $('input[name="registerEmail"').val() &&
+   $('input[name="registerTelephone"').val() &&
+   $('input[name="registerDOB"').val() &&
+   $('input[name="registerPostcode"').val() &&
+   $('input[name="registerHouseNo"').val() &&
+   $('input[name="registerPassword"').val() &&
+   $('input[name="registerPasswordConfirm"').val());
 }
 
-function closeRegisterModal(){
-  $('#registerModal').modal('hide');
-}
-
-function register(){
-  console.log('register clicked');
-}
-
-function docReady(fn){
-  if(document.readyState === "complete" || document.readyState === "interactive"){
-    setTimeout(fn, 1);
-  } else {
-    document.addEventListener("DOMContentLoaded", fn);
-  }
+function checkIllegalRegisterForm(){
+  return !!(validation.validateInput($('input[name="registerFName"').val()) &&
+   validation.validateInput($('input[name="registerSName"').val()) &&
+   validation.validateInput($('input[name="registerEmail"').val()) &&
+   validation.validateInput($('input[name="registerTelephone"').val()) &&
+   validation.validateInput($('input[name="registerPostcode"').val()) &&
+   validation.validateInput($('input[name="registerHouseNo"').val()) &&
+   validation.validateInput($('input[name="registerPassword"').val()) &&
+   validation.validateInput($('input[name="registerPasswordConfirm"').val()));
 }

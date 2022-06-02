@@ -17,8 +17,8 @@ router.get('/', async function(req, res, next) {
 });
 
 router.post('/login', async function(req,res){
-  let email = req.body.email;
-  let password = req.body.password;
+  let email = req.body.loginEmail;
+  let password = req.body.loginPassword;
 
   let sql = "SELECT UserType FROM Users WHERE Email='"+email+"' AND PasswordHash='"+password+"'";
 
@@ -29,6 +29,39 @@ router.post('/login', async function(req,res){
     }
     res.json(data);
   } catch(err){
+    console.log("error");
+  }
+});
+
+router.post('/register', async function(req,res){
+  let email = req.body.registerEmail;
+  let password = req.body.registerPassword;
+
+  let fName = req.body.registerFName;
+  let sName = req.body.registerSName;
+  let telephone = req.body.registerTelephone;
+  let postcode = req.body.registerPostcode;
+  let houseNo = req.body.registerHouseNo;
+  let dob = req.body.registerDOB;
+
+  let sql = "SELECT Email FROM Users WHERE Email='"+email+"'";
+
+  try{
+    let data = await query(sql);
+    if(data.length == 1){
+      res.json({exists: true});
+    }
+    else{
+      try{
+        sql = "INSERT INTO Users (Email, PasswordHash) VALUES ('"+email+"', '"+password+"');" +
+          "INSERT INTO Customers (UserID, FName, SName, DOB, Postcode, HouseNo, Telephone) VALUES((SELECT DISTINCT LAST_INSERT_ID() FROM Users), '"+fName+"', '"+sName+"', '"+dob+"', '"+postcode+"', '"+houseNo+"', '"+telephone+"');";
+        await query(sql);
+      } catch (err){
+        console.log('insert error');
+      }
+      res.json({exists: false});
+    }
+  } catch (err){
     console.log("error");
   }
 })
