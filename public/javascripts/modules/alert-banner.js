@@ -1,9 +1,9 @@
 // Variable to track timeout of current banner.
 // Allows it to be cleared if another banner replaces a current one.
-export var bannerTimeout;
+var bannerTimeout;
 
 // Alert banner displayed inside the pre-determined conatainer.
-export default function alertBanner(message){
+function alertBanner(message){
   // Alert banner already exists.
   if($('#alertBanner')[0]){
     // Remove the timeout for the existing banner.
@@ -28,7 +28,7 @@ export default function alertBanner(message){
   });
 }
 
-export function docReady(fn){
+function docReady(fn){
   if(document.readyState === "complete" || document.readyState === "interactive"){
     setTimeout(fn, 1);
   } else {
