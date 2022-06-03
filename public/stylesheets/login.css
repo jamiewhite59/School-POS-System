@@ -29,7 +29,7 @@ body{
 }
 
 
-.errorContainer{
+.alertContainer{
   position: relative;
   height: 10vh;
   width: 100%;

@@ -3,27 +3,30 @@ extends utilities
 append stylesheets
   link(href='stylesheets/login.css' rel='stylesheet')
 append scripts
-  script(type="module" src='javascripts/login.js')
+  script(src='javascripts/modules/validation.js')
+  script(src='javascripts/modules/modal.js')
+  script(src='javascripts/modules/alert-banner.js')
+  script(src='javascripts/login.js')
 
 block body 
   #contentContainer
-    .errorContainer
+    .alertContainer
     #loginContainer  
       form#loginForm(method='POST')
         img#schoolIconImage(src="/images/school_icon.png" alt="icon of school")
         p#loginLabel Account Login
         div.form-group
           div.form-floating
-            input.form-control#loginUsername(type='text' placeholder='Email' name='email')
+            input.form-control#loginUsername(type='text' placeholder='Email' name='loginEmail')
             label(for='loginEmail') Email
         div.form-group
           div.form-floating.input-group
-            input.form-control#loginPassword(type='password' placeholder='Password' name='password')
+            input.form-control#loginPassword(type='password' placeholder='Password' name='loginPassword')
             label(for='loginPassword') Password
             div.input-group-append
               span.input-group-text#passwordToggle test
         button.btn.btn-warning#loginSubmit(type='button') Login
-        button.btn.btn-warning#registerButton(type='button' data-toggle= "modal" data-target="#registerModal" onclick="openRegisterModal()") Register
+        button.btn.btn-warning#registerButton(type='button' data-toggle= "modal" data-target="#registerModal") Register
 
   .modal.fade#registerModal(tabindex="1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true")
     .modal-dialog.modal-lg(role="document")
@@ -35,38 +38,38 @@ block body
             .row
               .col-md-6.mb-3
                 label.form-label(for="fnameInput") First Name
-                input.form-control#fnameInput(type="text")
+                input.form-control#fnameInput(type="text" name="registerFName")
               .col-md-6.mb-3
                 label.form-label(for="snameInput") Surname
-                input.form-control#snameInput(type="text")
+                input.form-control#snameInput(type="text" name="registerSName")
             .row
               .col-md-4.mb-3
                 label.form-label(for="emailInput") Email
-                input.form-control#emailInput(type="text")
+                input.form-control#emailInput(type="text" name="registerEmail")
               .col-md-4.mb-3
                 label.form-label(for="phoneInput") Telephone
-                input.form-control#phoneInput(type="text")
+                input.form-control#phoneInput(type="text" name="registerTelephone")
               .col-md-4.mb-3
                 label.form-label(for="dobInput") Date of Birth
-                input.form-control#dobInput(type="text")
+                input.form-control#dobInput(type="date" name="registerDOB")
             .row
               .col-md-6.mb-3
                 label.form-label(for="postcodeInput") Postcode
-                input.form-control#postcodeInput(type="text")
+                input.form-control#postcodeInput(type="text" name="registerPostcode")
               .col-md-6.mb-3
                 label.form-label(for="housenoInput") House Number
-                input.form-control#housenoInput(type="text")
+                input.form-control#housenoInput(type="text" name="registerHouseNo")
             .row
               .col-12.mb-3
                 label.form-label(for="passwordInput") Password
-                input.form-control#passwordInput(type="password")
+                input.form-control#passwordInput(type="password" name="registerPassword")
             .row
               .col-12
                 label.form-label(for="passwordConfInput") Confirm Password
-                input.form-control#passwordConfInput(type="password")
+                input.form-control#passwordConfInput(type="password" name="registerPasswordConfirm")
         .modal-footer
-          button#closeRegisterModalButton.btn.btn-secondary(type="button" data-db-dismiss="modal" onclick="closeRegisterModal()") Close
-          button#modalRegisterButton.btn.btn-warning(type="button" onclick="register()") Register
+          button#closeRegisterModalButton.btn.btn-secondary(type="button" data-db-dismiss="modal" data-target="#registerModal") Close
+          button#modalRegisterButton.btn.btn-warning(type="button") Register
 
 
           
