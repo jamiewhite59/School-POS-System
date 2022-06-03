@@ -53,7 +53,7 @@ function checkLogin(){
       // If the returned item has length = 1 then there is successful login.
       if(returned.length == 1){
         // Redirect to landing page.
-        window.location.href = "/account"
+        window.location.href = "/customers"
       }
       else{
         alertBanner("Incorrect login details");
