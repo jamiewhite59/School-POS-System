@@ -1,7 +1,3 @@
-import * as validation from './modules/validation.js'
-import * as modal from './modules/modal.js'
-import alertBanner from './modules/alert-banner.js'
-
 $(document).ready(function(){
   // Set listeners for click events.
 
@@ -10,7 +6,7 @@ $(document).ready(function(){
   })
 
   $('#registerButton').click(function(){
-    modal.open(this);
+    open(this);
   })
 
   $('#modalRegisterButton').click(function(){
@@ -18,7 +14,7 @@ $(document).ready(function(){
   })
 
   $('#closeRegisterModalButton').click(function(){
-    modal.close(this);
+    close(this);
   })
 });
 
@@ -34,7 +30,7 @@ function validateLoginDetails(){
   // Check inputs are not empty.
   if($('input[name="loginEmail"').val() && $('input[name="loginPassword"').val()){
     // Validate each input box.
-    if(validation.validateInput($('input[name="loginEmail"]').val()) && validation.validateInput($('input[name="loginPassword"').val())){
+    if(validateInput($('input[name="loginEmail"]').val()) && validateInput($('input[name="loginPassword"').val())){
         return true;
     }
     alertBanner("Illegal characters in input");
@@ -89,13 +85,13 @@ function validateRegisterDetails(){
     return false;
   }
   // Checks for a valid email.
-  if(!validation.validateEmail($('input[name="registerEmail"').val())){
+  if(!validateEmail($('input[name="registerEmail"').val())){
     alertBanner("Invalid email");
     console.log('invalid email');
     return false;
   }
   // Checks for valid postcode.
-  if(!validation.validatePostcode($('input[name="registerPostcode"').val())){
+  if(!validatePostcode($('input[name="registerPostcode"').val())){
     alertBanner("Invalid postcode");
     console.log('invalid postcode');
     return false;
@@ -153,12 +149,12 @@ function checkEmptyRegisterForm(){
 }
 
 function checkIllegalRegisterForm(){
-  return !!(validation.validateInput($('input[name="registerFName"').val()) &&
-   validation.validateInput($('input[name="registerSName"').val()) &&
-   validation.validateInput($('input[name="registerEmail"').val()) &&
-   validation.validateInput($('input[name="registerTelephone"').val()) &&
-   validation.validateInput($('input[name="registerPostcode"').val()) &&
-   validation.validateInput($('input[name="registerHouseNo"').val()) &&
-   validation.validateInput($('input[name="registerPassword"').val()) &&
-   validation.validateInput($('input[name="registerPasswordConfirm"').val()));
+  return !!(validateInput($('input[name="registerFName"').val()) &&
+   validateInput($('input[name="registerSName"').val()) &&
+   validateInput($('input[name="registerEmail"').val()) &&
+   validateInput($('input[name="registerTelephone"').val()) &&
+   validateInput($('input[name="registerPostcode"').val()) &&
+   validateInput($('input[name="registerHouseNo"').val()) &&
+   validateInput($('input[name="registerPassword"').val()) &&
+   validateInput($('input[name="registerPasswordConfirm"').val()));
 }
