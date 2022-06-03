@@ -3,7 +3,10 @@ extends utilities
 append stylesheets
   link(href='stylesheets/login.css' rel='stylesheet')
 append scripts
-  script(type="module" src='javascripts/login.js')
+  script(src='javascripts/modules/validation.js')
+  script(src='javascripts/modules/modal.js')
+  script(src='javascripts/modules/alert-banner.js')
+  script(src='javascripts/login.js')
 
 block body 
   #contentContainer
