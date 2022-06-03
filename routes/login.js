@@ -54,7 +54,7 @@ router.post('/register', async function(req,res){
     else{
       try{
         sql = "INSERT INTO Users (Email, PasswordHash) VALUES ('"+email+"', '"+password+"');" +
-          "INSERT INTO Customers (UserID, FName, SName, DOB, Postcode, HouseNo, Telephone) VALUES((SELECT DISTINCT LAST_INSERT_ID() FROM Users), '"+fName+"', '"+sName+"', '"+dob+"', '"+postcode+"', '"+houseNo+"', '"+telephone+"');";
+          "INSERT INTO Customers (UserID, FName, SName, DOB, Postcode, HouseNo, Telephone) VALUES((SELECT DISTINCT LAST_INSERT_ID() FROM Users), '"+fName+"', '"+sName+"', '"+dob+"', '"+postcode.toUpperCase()+"', '"+houseNo+"', '"+telephone+"');";
         await query(sql);
       } catch (err){
         console.log('insert error');
